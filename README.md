@@ -55,7 +55,7 @@ et enfin re-brancher l'Ardino au port USB de l'ordinateur, ouvrir le gestionnair
 ***
 
 ## Arduino en USB Série <a id="a-en-usb-serie"></a>
-Le même que précédemment sauf que usb_midi_uno_r3.hex est remplacé par usb_midi_uno_r3.hex
+Le même que précédemment sauf que usb_midi_uno_r3.hex est remplacé par usb_midi_uno_r3.hex et qu'il ne sera plus qu'en série (comme à l'origine).
 
 ***
 

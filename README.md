@@ -13,7 +13,7 @@
 
 Décompresser dfu-programmer-win-0.7.2.7z et aller dans ce dossier
 
-Déconnecter, enlever tous les fils de montage (Arduino à nu) et connecter l'arduino et faire ceci 
+Déconnecter, enlever tous les fils de montage (Arduino à nu) et connecter l'arduino et faire ce court circuit :
 
 ![image.png](img/avantDeProgrammer.png)
 
@@ -44,7 +44,7 @@ Re-connecter pour voir
 
 ![./image.png](img/apparaitEnMidi.png)
 
-Pour remettre un nouveau sketch (programme) alors le passer en Port "USB-Série" il faut : déconnecter l'Arduino, puis connecter ces broches 
+Pour remettre un nouveau sketch (programme) alors le passer en Port "USB-Série" il faut : déconnecter l'Arduino,  faire un court circuit permanent
 
 ![image.png](img/pourLeReprogrammer.png) 
 

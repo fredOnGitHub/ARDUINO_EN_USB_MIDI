@@ -11,7 +11,7 @@
 
 ## Arduino en USB Midi (images de Windows) <a id="a-en-usb-midi"></a>
 
-* Décompresser dfu-programmer-win-0.7.2.7z et aller dans ce dossier
+* Aller dans https://github.com/dfu-programmer/dfu-programmer/releases/tag/v1.1.0 pour récupérer le programme Windows
 * Déconnecter
 * Enlever tous les fils de montage (Arduino à nu)
 * Connecter l'arduino et faire ce court-circuit :

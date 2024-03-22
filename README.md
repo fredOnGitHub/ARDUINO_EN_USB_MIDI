@@ -1,91 +1,74 @@
- 
-# ARDUINO EN USB MIDI
+# Tout d'abord
+* le fichier arduino uno rev 3 .hex pour le midi est dans https://github.com/kuwatay/mocolufa/tree/master/HEX/dualMoco.hex
+* le fichier arduino uno rev 3 .hex pour la com série (original) est ici https://github.com/arduino/ArduinoCore-avr/blob/master/firmwares/atmegaxxu2/arduino-usbserial/Arduino-usbserial-atmega16u2-Uno-Rev3.hex (c'est ce qui est dit dans le README.txt et aussi ici https://support.arduino.cc/hc/en-us/articles/4408887452434-Flash-USB-to-serial-firmware-in-DFU-mode)
 
-- [ARDUINO EN USB MIDI](#arduino-en-usb-midi)
-  - [Arduino en USB Midi](#a-en-usb-midi)
-  - [Arduino en USB Série](#a-en-usb-serie)
-  - [Générer usb_midi_uno_r3.hex](#generer-hex)
-  - [Sites Web](#sites)
-  - [Programmer le µc 16U2 avec FLIP (pas testé)](#flip)
+# Table des matières
+
+- [Arduino en USB Midi](#a-en-usb-midi)
+  - [Mettre un sketch (un programme)](#sketch)
+- [Arduino en USB Série](#a-en-usb-serie)
 
 
-## Arduino en USB Midi<a id="a-en-usb-midi"></a>
+## Arduino en USB Midi (images de Windows) <a id="a-en-usb-midi"></a>
 
-Décompresser dfu-programmer-win-0.7.2.7z et aller dans ce dossier
-
-Déconnecter, enlever tous les fils de montage (Arduino à nu) et connecter l'arduino et faire ce court-circuit :
+* Décompresser dfu-programmer-win-0.7.2.7z et aller dans ce dossier
+* Déconnecter
+* Enlever tous les fils de montage (Arduino à nu)
+* Connecter l'arduino et faire ce court-circuit :
 
 ![image.png](img/avantDeProgrammer.png)
 
-puis
+puis pour Windows
 
 ```
 > .\dfu-programmer.exe  atmega16u2 erase
-Checking memory from 0x0 to 0x2FFF...  Not blank at 0x1.
-Erasing flash...  Success
-> .\dfu-programmer.exe atmega16u2 flash .\usb_midi_uno_r3.hex
-Checking memory from 0x0 to 0x14FF...  Empty.
-0%                            100%  Programming 0x1500 bytes...
-[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>]  Success
-0%                            100%  Reading 0x3000 bytes...
-[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>]  Success
-Validating...  Success
-0x1500 bytes written into 0x3000 bytes memory (43.75%).
+> .\dfu-programmer.exe atmega16u2 flash .\dualMoco.hex
 > .\dfu-programmer.exe atmega16u2 reset
 ```
 
-Déconnecter l'Arduino Uno 
+pour Linux
 
-Re-connecter pour voir 
+```
+cd ~/Téléchargements/mocolufa-master/HEX
+dfu-programmer atmega16u2 erase
+dfu-programmer atmega16u2 flash dualMoco.hex
+dfu-programmer atmega16u2 reset
+```
 
-![image.png](img/appareilPret.png) 
-
-& 
-
+* Déconnecter l'Arduino Uno
+* Re-connecter pour voir\
+![image.png](img/appareilPret.png)\
+et\
 ![./image.png](img/apparaitEnMidi.png)
 
-Pour remettre un nouveau sketch (programme) alors le passer en Port "USB-Série" il faut : déconnecter l'Arduino,  faire un court-circuit permanent
+Avec Linux on verra ce port Midi avec :
+```
+$ aplaymidi -l
+ Port    Client name                      Port name
+ 32:0    MocoLUFA                         MocoLUFA MIDI 1
+```
 
-![image.png](img/pourLeReprogrammer.png) 
-
-et enfin re-brancher l'Ardino au port USB de l'ordinateur, ouvrir le gestionnaire de périphériques Windows pour voir COM3 (ou un autre COM*)
-
+## Mettre un nouveau programme (en configuration MIDI)<a id="sketch"></a>
+Pour remettre un nouveau sketch (programme) alors le passer en Port "USB-Série" il faut :
+* déconnecter l'Arduino
+* faire un court-circuit permanent\
+![image.png](img/pourLeReprogrammer.png)\
+* Re-brancher l'Ardino au port USB de l'ordinateur
+* ouvrir le gestionnaire de périphériques Windows pour voir COM3 (ou un autre COM*)\
 ![image.png](img/apparaitEnSerie.jpg)
 
 ***
 
 ## Arduino en USB Série <a id="a-en-usb-serie"></a>
-Le même que précédemment sauf que usb_midi_uno_r3.hex est remplacé par usb_midi_uno_r3.hex et qu'il ne sera plus qu'en série (comme à l'origine).
+Le même que précédemment sauf que "version_midi.hex" est remplacé par "version_série_d_origine.hex".\
+Il redeviendra en série (comme à l'origine).
 
+Avec Linux on verra ce port serie :
+```
+ll /dev/ttyACM0
+crw-rw---- 1 root dialout 166, 0 mars  22 16:03 /dev/ttyACM0
+```
 ***
-
-## Générer usb_midi_uno_r3.hex<a id="generer-hex"></a>
-
-https://moco-lufa-web-client.herokuapp.com/#/ 
-
-![image.png](img/lufa.png)
-
-***
-
-## Sites Web <a id="sites"></a>
-
-[Updating the Atmega8U2 and 16U2 on an Uno or Mega2560 Using DFU](https://docs.arduino.cc/hacking/software/DFUProgramming8U2)
-
-[MIDI over USB](https://dartmobo.com/midi-over-usb/)
-
-[#3 Traktorino how to: Make the Arduino a MIDI Class-Compliant Device](https://www.youtube.com/watch?v=18OKo9sQ_s0)
-
-
-## <a id="flip">Programmer le µc 16U2 avec FLIP (pas testé)</a>
-jre for all platform
-https://www.java.com/fr/download/manual.jsp
-sinon bug jre non trouvé
-
-https://microchipsupport.force.com/s/article/Flip-software-for-Windows-10-64-bit
-
-https://www.arduino.cc/en/Hacking/DFUProgramming8U2
-dfu-programmer
-https://dfu-programmer.github.io/
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
